@@ -1,7 +1,7 @@
-package com.sahil.dairy.milk_production.entity;
+package com.sahil.dairy.milkrecords.entity;
 
 import com.sahil.dairy.animal.entity.Animal;
-import com.sahil.dairy.milk_production.enums.MilkSession;
+import com.sahil.dairy.milkrecords.enums.MilkSession;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -43,6 +43,12 @@ public class MilkRecord {
 
     @Column(name = "snf_percentage", precision = 4, scale = 2)
     private BigDecimal snfPercentage;
+
+    @Column(name = "rate_per_liter", precision = 8, scale = 2, nullable = false)
+    private BigDecimal ratePerLiter;
+
+    @Column(name = "total_amount", precision = 10, scale = 2, nullable = false)
+    private BigDecimal totalAmount;
 
     @Column(length = 500)
     private String notes;

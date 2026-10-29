@@ -1,6 +1,6 @@
-package com.sahil.dairy.milk_production.dto;
+package com.sahil.dairy.milkrecords.dto;
 
-import com.sahil.dairy.milk_production.enums.MilkSession;
+import com.sahil.dairy.milkrecords.enums.MilkSession;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;

@@ -35,6 +35,7 @@ public class AnimalServiceImpl implements AnimalService {
                 .dateOfBirth(animal.getDateOfBirth())
                 .weightKg(animal.getWeightKg())
                 .animalStatus(animal.getAnimalStatus())
+                .lactationStatus(animal.getLactationStatus())
                 .purchaseDate(animal.getPurchaseDate())
                 .purchasePrice(animal.getPurchasePrice())
                 .sellingDate(animal.getSellingDate())
@@ -68,6 +69,7 @@ public class AnimalServiceImpl implements AnimalService {
                 .dateOfBirth(request.getDateOfBirth())
                 .weightKg(request.getWeightKg())
                 .animalStatus(request.getAnimalStatus())
+                .lactationStatus(request.getLactationStatus())
                 .purchaseDate(request.getPurchaseDate())
                 .purchasePrice(request.getPurchasePrice())
                 .sellingDate(request.getSellingDate())
@@ -102,6 +104,7 @@ public class AnimalServiceImpl implements AnimalService {
         animal.setDateOfBirth(request.getDateOfBirth());
         animal.setWeightKg(request.getWeightKg());
         animal.setAnimalStatus(request.getAnimalStatus());
+        animal.setLactationStatus(request.getLactationStatus());
         animal.setPurchaseDate(request.getPurchaseDate());
         animal.setPurchasePrice(request.getPurchasePrice());
         animal.setSellingDate(request.getSellingDate());

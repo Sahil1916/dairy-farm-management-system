@@ -1,26 +1,29 @@
-//package com.sahil.dairy.user.repository;
-//
-//
-//
-//
-//import com.sahil.dairy.user.entity.User;
-//import com.sahil.dairy.user.enums.Roles;
-//import org.springframework.data.jpa.repository.JpaRepository;
-//import org.springframework.stereotype.Repository;
-//
-//import java.util.List;
-//import java.util.Optional;
-//
-//@Repository
-//public interface UserRepository extends JpaRepository<User, Long> {
-//
-//    Optional<User> findByUsername(String username);
-//
-//    boolean existsByUsername(String username);
-//
-//    List<User> findByFarmId(Long farmId);
-//
-//    List<User> findByFarmIdAndRole(Long farmId, Roles role);
-//
-//    List<User> findByFarmIdAndIsActiveTrue(Long farmId);
-//}
+package com.sahil.dairy.user.repository;
+
+import com.sahil.dairy.user.entity.User;
+import com.sahil.dairy.user.enums.Roles;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+
+    boolean existsByEmail(String email);
+
+    boolean existsByPhone(String phone);
+
+    Optional<User> findByEmail(String email);
+
+    Optional<User> findByPhone(String phone);
+
+    List<User> findByRole(Roles role);
+
+    List<User> findByActive(Boolean active);
+
+    List<User> findByFarmId(Long farmId);
+
+    Optional<User> findByEmailAndActiveTrue(String email);
+
+
+}

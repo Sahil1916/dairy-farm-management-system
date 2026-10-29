@@ -1,4 +1,4 @@
-package com.sahil.dairy.milk_production.enums;
+package com.sahil.dairy.milkrecords.enums;
 
 public enum MilkSession {
 

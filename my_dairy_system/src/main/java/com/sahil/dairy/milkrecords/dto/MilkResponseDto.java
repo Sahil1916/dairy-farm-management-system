@@ -1,7 +1,7 @@
-package com.sahil.dairy.milk_production.dto;
+package com.sahil.dairy.milkrecords.dto;
 
 import com.sahil.dairy.animal.enums.AnimalType;
-import com.sahil.dairy.milk_production.enums.MilkSession;
+import com.sahil.dairy.milkrecords.enums.MilkSession;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -33,6 +33,10 @@ public class MilkResponseDto {
     private BigDecimal fatPercentage;
 
     private BigDecimal snfPercentage;
+
+    private BigDecimal ratePerLiter;
+
+    private BigDecimal totalAmount;
 
     private String notes;
 

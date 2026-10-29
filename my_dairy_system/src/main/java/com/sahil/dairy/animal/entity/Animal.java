@@ -3,6 +3,7 @@ package com.sahil.dairy.animal.entity;
 import com.sahil.dairy.animal.enums.AnimalStatus;
 import com.sahil.dairy.animal.enums.AnimalType;
 import com.sahil.dairy.animal.enums.Gender;
+import com.sahil.dairy.animal.enums.LactationStatus;
 import com.sahil.dairy.farm.entity.Farm;
 import jakarta.persistence.*;
 import lombok.*;
@@ -81,7 +82,7 @@ public class Animal {
     @Column(name = "expected_calving_date")
     private LocalDate expectedCalvingDate;
 
-
+    private LactationStatus lactationStatus;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)

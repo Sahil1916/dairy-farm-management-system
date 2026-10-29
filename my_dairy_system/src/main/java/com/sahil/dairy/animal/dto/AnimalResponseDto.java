@@ -3,6 +3,7 @@ package com.sahil.dairy.animal.dto;
 import com.sahil.dairy.animal.enums.AnimalStatus;
 import com.sahil.dairy.animal.enums.AnimalType;
 import com.sahil.dairy.animal.enums.Gender;
+import com.sahil.dairy.animal.enums.LactationStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,6 +40,8 @@ public class AnimalResponseDto {
     private BigDecimal weightKg;
 
     private AnimalStatus animalStatus;
+
+    private LactationStatus lactationStatus;
 
     private LocalDate purchaseDate;
 

@@ -11,6 +11,28 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(org.springframework.web.method.annotation.MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ErrorResponse> handleTypeMismatch(
+            org.springframework.web.method.annotation.MethodArgumentTypeMismatchException ex,
+            HttpServletRequest request) {
+        // #region agent log
+        com.sahil.dairy.AgentDebugLog.log("F", "GlobalExceptionHandler.handleTypeMismatch",
+                "path variable type mismatch",
+                "{\"path\":\"" + request.getRequestURI()
+                        + "\",\"name\":\"" + ex.getName()
+                        + "\",\"value\":\"" + String.valueOf(ex.getValue()).replace("\"", "'")
+                        + "\",\"requiredType\":\"" + (ex.getRequiredType() == null ? "null" : ex.getRequiredType().getName())
+                        + "\"}");
+        // #endregion
+        ErrorResponse error = ErrorResponse.builder()
+                .status(HttpStatus.BAD_REQUEST.value())
+                .message(ex.getMessage())
+                .timestamp(LocalDateTime.now())
+                .path(request.getRequestURI())
+                .build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleResourceNotFound(
             ResourceNotFoundException ex,
@@ -50,6 +72,16 @@ public class GlobalExceptionHandler {
             Exception ex,
             HttpServletRequest request) {
 
+        // #region agent log
+        com.sahil.dairy.AgentDebugLog.log("B,C,E,F", "GlobalExceptionHandler.handleGenericException",
+                "unhandled exception",
+                "{\"path\":\"" + request.getRequestURI()
+                        + "\",\"ex\":\"" + ex.getClass().getName()
+                        + "\",\"msg\":\"" + String.valueOf(ex.getMessage()).replace("\"", "'")
+                        + "\",\"cause\":\"" + (ex.getCause() == null ? "null" : ex.getCause().getClass().getName())
+                        + "\"}");
+        // #endregion
+
         ErrorResponse error = ErrorResponse.builder()
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .message(ex.getMessage())
@@ -60,5 +92,19 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(error);
+    }
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ErrorResponse> handleBadRequestException(
+            BadRequestException ex,
+            HttpServletRequest request) {
+
+        ErrorResponse error = ErrorResponse.builder()
+                .status(HttpStatus.BAD_REQUEST.value())
+                .message(ex.getMessage())
+                .timestamp(LocalDateTime.now())
+                .path(request.getRequestURI())
+                .build();
+
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 }

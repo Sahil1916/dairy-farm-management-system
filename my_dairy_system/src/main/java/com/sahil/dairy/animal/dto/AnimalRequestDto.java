@@ -3,6 +3,7 @@ package com.sahil.dairy.animal.dto;
 import com.sahil.dairy.animal.enums.AnimalStatus;
 import com.sahil.dairy.animal.enums.AnimalType;
 import com.sahil.dairy.animal.enums.Gender;
+import com.sahil.dairy.animal.enums.LactationStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -46,6 +47,8 @@ public class AnimalRequestDto {
 
     @NotNull(message = "Animal status is required")
     private AnimalStatus animalStatus;
+
+    private LactationStatus lactationStatus;
 
     private LocalDate purchaseDate;
 
