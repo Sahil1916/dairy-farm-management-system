@@ -9,7 +9,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -33,10 +32,7 @@ public class Animal {
     private Farm farm;
 
     @Column(name = "ear_tag_number", nullable = false, unique = true)
-    @UniqueElements
     private String earTagNumber;
-
-
 
     @Column(nullable = false)
     private String name;
@@ -61,7 +57,6 @@ public class Animal {
     @Column(name = "animal_status")
     private AnimalStatus animalStatus;
 
-
     @Column(name = "purchase_date")
     private LocalDate purchaseDate;
 
@@ -73,8 +68,6 @@ public class Animal {
 
     @Column(name = "selling_price", precision = 12, scale = 2)
     private BigDecimal sellingPrice;
-
-
 
     @Column(name = "last_calving_date")
     private LocalDate lastCalvingDate;
@@ -92,4 +85,3 @@ public class Animal {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 }
-

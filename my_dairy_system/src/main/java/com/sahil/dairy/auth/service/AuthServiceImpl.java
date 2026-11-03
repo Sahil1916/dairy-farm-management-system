@@ -1,7 +1,5 @@
 package com.sahil.dairy.auth.service;
 
-import com.sahil.dairy.auth.dto.RegisterRequest;
-import com.sahil.dairy.auth.dto.RegisterResponse;
 import com.sahil.dairy.security.dto.LoginRequest;
 import com.sahil.dairy.security.dto.LoginResponse;
 import com.sahil.dairy.security.jwt.JwtService;
@@ -22,39 +20,7 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Override
-    public RegisterResponse register(RegisterRequest request) {
 
-        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            throw new RuntimeException("Email already exists");
-        }
-
-        if (userRepository.findByPhone(request.getPhone()).isPresent()) {
-            throw new RuntimeException("Phone number already exists");
-        }
-
-        User user = User.builder()
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .email(request.getEmail())
-                .phone(request.getPhone())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .role(request.getRole())
-                .build();
-
-        User savedUser = userRepository.save(user);
-
-        String token = jwtService.generateToken(savedUser);
-
-        return RegisterResponse.builder()
-                .token(token)
-                .userId(savedUser.getId())
-                .firstName(savedUser.getFirstName())
-                .lastName(savedUser.getLastName())
-                .email(savedUser.getEmail())
-                .role(savedUser.getRole())
-                .build();
-    }
 
     @Override
     public LoginResponse login(LoginRequest request) {
