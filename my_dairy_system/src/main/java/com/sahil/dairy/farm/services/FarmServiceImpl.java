@@ -7,6 +7,7 @@ import com.sahil.dairy.farm.dto.FarmResponseDto;
 import com.sahil.dairy.farm.entity.Farm;
 import com.sahil.dairy.farm.repository.FarmRepository;
 import com.sahil.dairy.user.entity.User;
+import com.sahil.dairy.user.enums.Roles;
 import com.sahil.dairy.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -105,6 +106,12 @@ public class FarmServiceImpl implements FarmService {
                 .map(farm -> FarmResponseDto.builder()
                         .id(farm.getId())
                         .farmName(farm.getFarmName())
+                        // Farm शी संबंधित OWNER शोधून त्याचे पूर्ण नाव Response मध्ये भरतो.
+                        .ownerName(
+                                userRepository.findByFarmIdAndRole(farm.getId(), Roles.OWNER)
+                                        .map(owner -> owner.getFirstName() + " " + owner.getLastName())
+                                        .orElse(null)
+                        )
                         .phone(farm.getPhone())
                         .email(farm.getEmail())
                         .address(farm.getAddress())

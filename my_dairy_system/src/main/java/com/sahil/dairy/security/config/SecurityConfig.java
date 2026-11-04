@@ -73,8 +73,20 @@ public class SecurityConfig {
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+
+                        // OPTIONS requests परवानगी देतो (CORS Preflight).
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
+                        // Login API Authentication शिवाय वापरता येतो.
                         .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+
+                        // Initial Setup ची स्थिती तपासण्याची परवानगी.
+                        .requestMatchers(HttpMethod.GET, "/api/setup/status").permitAll()
+
+                        // पहिल्यांदा Owner आणि Farm तयार करण्याची परवानगी.
+                        .requestMatchers(HttpMethod.POST, "/api/setup/initial").permitAll()
+
+                        // इतर सर्व API साठी Login आवश्यक आहे.
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())

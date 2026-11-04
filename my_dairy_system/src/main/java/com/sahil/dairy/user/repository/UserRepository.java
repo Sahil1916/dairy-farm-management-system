@@ -26,5 +26,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmailAndActiveTrue(String email);
 
     boolean existsByRole(Roles role);
+    // दिलेल्या Farm ID आणि OWNER Role नुसार Owner शोधते.
+    Optional<User> findByFarmIdAndRole(Long farmId, Roles role);
 
 }
